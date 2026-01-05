@@ -1,16 +1,10 @@
-// Input variables
 let left = false, right = false, gas = false;
 
-const leftBtn = document.getElementById("left");
-const rightBtn = document.getElementById("right");
-const gasBtn = document.getElementById("gas");
+document.getElementById("left").ontouchstart = () => left = true;
+document.getElementById("left").ontouchend = () => left = false;
 
-// Touch events
-leftBtn.ontouchstart = () => left = true;
-leftBtn.ontouchend = () => left = false;
+document.getElementById("right").ontouchstart = () => right = true;
+document.getElementById("right").ontouchend = () => right = false;
 
-rightBtn.ontouchstart = () => right = true;
-rightBtn.ontouchend = () => right = false;
-
-gasBtn.ontouchstart = () => gas = true;
-gasBtn.ontouchend = () => gas = false;
+document.getElementById("gas").ontouchstart = () => gas = true;
+document.getElementById("gas").ontouchend = () => gas = false;
