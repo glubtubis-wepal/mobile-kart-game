@@ -1,4 +1,3 @@
-// Track object with procedural generation
 const track = {
   segments: [],
   segmentWidth: 150,
@@ -8,16 +7,14 @@ const track = {
   generate: function() {
     this.segments = [];
 
-    // Start position
     let x = window.innerWidth / 4;
     let y = window.innerHeight / 2;
 
     for (let i = 0; i < this.segmentCount; i++) {
       this.segments.push({ x, y, width: this.segmentWidth, height: this.segmentHeight });
 
-      // Randomly move next segment
-      const dx = Math.random() * 200 - 100; // -100 to 100
-      const dy = Math.random() * 100 - 50;  // -50 to 50
+      const dx = Math.random() * 200 - 100; // move horizontally
+      const dy = Math.random() * 100 - 50;  // move vertically
 
       x = Math.max(0, Math.min(window.innerWidth - this.segmentWidth, x + dx));
       y = Math.max(0, Math.min(window.innerHeight - this.segmentHeight, y + dy));
@@ -31,23 +28,19 @@ const track = {
     }
   },
 
-  // Check kart bounds (keep inside track)
   clampKart: function(kart) {
     for (let seg of this.segments) {
       if (
         kart.x > seg.x && kart.x < seg.x + seg.width &&
         kart.y > seg.y && kart.y < seg.y + seg.height
-      ) {
-        // Kart is inside a segment → fine
-        return;
-      }
+      ) return; // inside segment
     }
-    // Kart outside all segments → push back to nearest segment
-    const nearest = this.segments[0];
-    kart.x = nearest.x + nearest.width/2;
-    kart.y = nearest.y + nearest.height/2;
+    // Outside all segments → push back to first segment
+    const seg = this.segments[0];
+    kart.x = seg.x + seg.width / 2;
+    kart.y = seg.y + seg.height / 2;
   }
 };
 
-// Generate the track at the start
+// Generate track immediately
 track.generate();
