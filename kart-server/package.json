@@ -1,8 +1,0 @@
-{
-  "name": "kart-server",
-  "version": "1.0.0",
-  "main": "server.js",
-  "dependencies": {
-    "ws": "^8.15.0"
-  }
-}
