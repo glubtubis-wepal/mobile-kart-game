@@ -44,3 +44,24 @@ const track = {
 
 // Generate track immediately
 track.generate();
+
+// In track.js
+updateSegments() {
+  // Remove old segments far behind the kart
+  this.segments = this.segments.filter(seg => seg.x + seg.width > kart.x - 400);
+
+  // Add new segments ahead if needed
+  const lastSeg = this.segments[this.segments.length - 1];
+  if (lastSeg.x < kart.x + 1000) {
+    let dx = Math.random() * 200 - 100;
+    let dy = Math.random() * 100 - 50;
+    let newSeg = {
+      x: Math.max(0, Math.min(window.innerWidth - this.segmentWidth, lastSeg.x + dx)),
+      y: Math.max(0, Math.min(window.innerHeight - this.segmentHeight, lastSeg.y + dy)),
+      width: this.segmentWidth,
+      height: this.segmentHeight
+    };
+    this.segments.push(newSeg);
+  }
+}
+
